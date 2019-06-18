@@ -5,4 +5,4 @@ USER root
 ADD nexus_license.lic /
 ADD config.yml /etc/nexus-iq-server/
 
-RUN printf "licenseFile: /test.lic" >> /etc/nexus-iq-server/config.yml
+RUN printf "licenseFile: /nexus_license.lic" >> /etc/nexus-iq-server/config.yml
