@@ -1,8 +1,6 @@
-FROM sonatype/nexus-iq-server
+FROM sonatype/nexus-iq-server:1.69.0
 
 USER root
 
-ADD nexus_license.lic /
 ADD config.yml /etc/nexus-iq-server/
-
-RUN printf "licenseFile: /nexus_license.lic" >> /etc/nexus-iq-server/config.yml
+ADD postStart.sh /postStart.sh
