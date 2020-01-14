@@ -19,15 +19,23 @@ Have docker installed
 
 ## Build
 
-    `docker build --no-cache -t localhost:5000/nuxeo/nexusiq/central .`
+```bash
+export NEXUSIQ_VERSION=3.19.1
+export SCM_REF=`git id`
+export VERSION=`git rev-parse --symbolic-full-name --abbrev-ref HEAD`
+export DESCRIPTION=<DESCRIPTION>
 
+echo $NEXUSIQ_VERSION $(git rev-parse --short HEAD) $VERSION $DOCKER_REGISTRY
+docker build --build-arg NEXUSIQ_VERSION --build-arg VERSION --build-arg SCM_REF --build-arg DESCRIPTION \
+    -t devtools/nexusiq:$VERSION .
+```
 
 ## Deploy on Nuxeo Private Docker Registry
 
-    ```
-    docker tag localhost:5000/nuxeo/nexusiq/central  dockerpriv.nuxeo.com:443/devtools/nexusiq:central
-    docker push dockerpriv.nuxeo.com:443/devtools/nexusiq:central
-    ```
+```bash
+docker tag localhost:5000/devtools/nexusiq:$VERSION dockerpriv.nuxeo.com/devtools/nexusiq:central
+docker push dockerpriv.nuxeo.com/devtools/nexusiq:central
+```
 
 # License
 
